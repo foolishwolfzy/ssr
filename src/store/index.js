@@ -9,8 +9,9 @@ const changeList = list=>({
 
 export const getIndexList = server=>{
 	return (dispatch,getState,axiosInstance)=>{
-		return axios.get('http://localhost:9089/api/course/list').then(res=>{
+		return axios.get('http://localhost:9090/api/course/list').then(res=>{
 			const {list} = res.data
+			console.log('list',list);
 			dispatch(changeList(list))
 		})
 	}
