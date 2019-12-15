@@ -6,6 +6,7 @@ function Index(props){
 	// let [count,setCount] = useState(1)
 	const [count,setCount] = useState(1)
 	useEffect(()=>{
+		// 异步数据首页显示
 		props.getIndexList()
 	},[])
 	return <div>
