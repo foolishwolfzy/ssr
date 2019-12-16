@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:start\"",
+    "start": "concurrently \"npm run dev:client\" \"npm run dev:server\" \"npm run dev:start\" \"npm run dev:mock\"",
     "go": "concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:start\"",
     "z": "concurrently \"npm run dev:start\" \"npm run dev:server\" \"npm run dev:client\"",
     "dev:client": "webpack --config webpack.client.js --watch",
     "dev:start": "nodemon --watch build --exec node \"./build/bundle.js\"",
+    "dev:mock": "nodemon --exec node \"mock.js\"",
     "dev:server": "webpack --config webpack.server.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,6 +29,7 @@
     "babel-loader": "^8.0.6",
     "concurrently": "^5.0.1",
     "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0",
     "nodemon": "^2.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import { Route } from "react-router-dom";
 import Index from "./container/index.js";
 import About from "./container/about.js";
+import User from "./container/user.js";
 
 // export default (
 // 	<div>
@@ -15,7 +16,7 @@ export default [
 		path:'/',
 		component:Index,
 		// loadData:index,
-		exact:true,
+		// exact:true,
 		key:'index'
 	},
 	{
@@ -24,5 +25,12 @@ export default [
 		// loadData:about,
 		exact:true,
 		key:'about'
+	},
+	{
+		path:'/user',
+		component:User,
+		// loadData:user,
+		exact:true,
+		key:'user'
 	}
 ]
