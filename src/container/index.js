@@ -29,7 +29,10 @@ function Index(props){
 		</ul>
 	</div>
 }
+
+// 服务端loadData
 Index.loadData = (store)=>{
+	// console.log('index-loadData---', store.dispatch(getIndexList()))
 	return store.dispatch(getIndexList())
 }
 export default connect(

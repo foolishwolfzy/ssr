@@ -18,35 +18,39 @@ app.use('/api', proxy('http://localhost:9090', {
     return '/api' + req.url
   }
 }))
+//捕捉接口错误
+const interceptPromises = (promises)=> {
+	return promises.map(promise =>
+		promise.then(res => {
+			// console.log('hp=then---res',res)
+			return { code: 0, data: res }
+		})
+		.catch(err => {
+			// console.log('hp=catch---err',err)
+			return { code: 500, data: err }
+		})
+	)
+}
+// 把public设置为静态资源目录，这样才能读到客户端的js
 app.use(express.static('public'))
-	app.get('*', (req, res) => {
+app.get('*', (req, res) => {
 	// 获取根据路由渲染出的组件，并且拿到loadData方法，获取数据
 	// 存储网络请求
 	const promises = [];
-	// routes.some(route => {
-		routes.filter(route => {
-		const match = matchPath(req.path, route);
+	routes.some(route => {
+	// routes.filter(route => {
+			// console.log('route',route);
+		const match = matchPath(req.path,route);
+		// console.log('match---',match);
 		if (match) {
 			const {loadData} = route.component
+			// console.log('loadData---',loadData);
 			if(loadData){
 				promises.push(loadData(store));
 			}
 		}
-		return match;
-	});
-	//捕捉接口错误
-	const interceptPromises = (promises)=> {
-		return promises.map(promise =>
-			promise.then(res => {
-				// console.log('hp=then---res',res)
-				return { code: 0, data: res }
-			})
-			.catch(err => {
-				// console.log('hp=catch---err',err)
-				return { code: 500, data: err }
-			})
-		)
-	}
+		// return match;
+	})
 	// 等待所有网络请求结束再渲染
 	Promise.all(interceptPromises(promises)).then(data => {
 			// console.log('data---======',data);

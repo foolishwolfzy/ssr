@@ -8,9 +8,11 @@ const changeUserInfo = data=>({
 })
 
 export const getUserInfo = server=>{
-	console.log('getUserInfo---')
+	// console.log('getUserInfo---===')
 	return (dispatch,getState,axiosInstance)=>{
+		// console.log('getUserInfo---===return1')
 		return axios.get('/api/user/info').then(res=>{
+			// console.log('getUserInfo---===return2')
 			// return axios.get('http://localhost:9090/api/user/info').then(res=>{
 			const {data} = res.data
 			console.log('user-info',data);
@@ -24,6 +26,8 @@ const defaultState={
 }
 
 export default (state=defaultState,action) =>{
+	console.log('user-action---',action.type);
+	console.log('GET_LIST---===',GET_LIST);
 	switch(action.type){
 		case GET_LIST:
 			const newState={
