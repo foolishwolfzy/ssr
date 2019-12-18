@@ -16,7 +16,7 @@ export default [
 		path:'/',
 		component:Index,
 		// loadData:index,
-		// exact:true,//精确匹配
+		exact:true,//精确匹配
 		key:'index'
 	},
 	{

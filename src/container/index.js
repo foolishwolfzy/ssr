@@ -9,7 +9,7 @@ function Index(props){
 	useEffect(()=>{
 		// 异步数据首页显示
 		if(!props.list.length){
-			// 客户端获取
+			// 当不是首次或刷新进来，无数据，通过客户端获取
 			props.getIndexList()
 		}
 		
