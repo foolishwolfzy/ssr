@@ -23,7 +23,12 @@ module.exports = {
 			{
 				test:/\.css$/,
 				//改成同构的style-loader
-				use:['isomorphic-style-loader','css-loader'],
+				use:['isomorphic-style-loader',{
+					loader:'css-loader',
+					options:{
+						modules:true
+					}
+				}],
 				// use:[style-loader,css-loader],
 			}
 		]

@@ -4,7 +4,7 @@ import Index from "./container/index.js";
 import About from "./container/about.js";
 import User from "./container/user.js";
 import Notfound from "./container/Notfound.js";
-import "./App.css";
+// import "./App.css";
 
 // export default (
 // 	<div>

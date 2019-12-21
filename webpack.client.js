@@ -9,7 +9,7 @@ module.exports = {
 		filename:'bundle.js',
 		path:path.resolve(__dirname, 'public'),
 	},
-	plugin:[
+	plugins:[
 		new HtmlWebpackPlugin({
 			filename:'index.csr.html',
 			template:'src/index.csr.html',
@@ -29,7 +29,12 @@ module.exports = {
 			},
 			{
 				test:/\.css$/,
-				use:['style-loader','css-loader'],
+				use:['style-loader',{
+					loader:'css-loader',
+					options:{
+						modules:true
+					}
+				}],
 			}
 		]
 	}

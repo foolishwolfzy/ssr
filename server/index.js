@@ -3,6 +3,8 @@ import { renderToString } from "react-dom/server";
 import express from "express";
 import { StaticRouter,matchPath, Route,Switch } from "react-router-dom";
 import routes from "../src/App";
+import path from "path";
+import fs from "fs";
 import { Provider } from "react-redux";
 import {getServerStore} from '../src/store/store.js'
 import Header from "../src/component/Header.js";
@@ -18,6 +20,12 @@ app.use('/api', proxy('http://localhost:9090', {
     return '/api' + req.url
   }
 }))
+function csrRender(res){
+	//读取csr文件返回
+	const filename = path.resolve(process.cwd(),'public/index.csr.html')
+	const html = fs.readFileSync(filename,'utf-8')
+	return res.send(html)
+}
 //捕捉接口错误
 const interceptPromises = (promises)=> {
 	return promises.map(promise =>
@@ -34,6 +42,11 @@ const interceptPromises = (promises)=> {
 // 把public设置为静态资源目录，这样才能读到客户端的js
 app.use(express.static('public'))
 app.get('*', (req, res) => {
+	// console.log('res.query---',req.query)
+	if(req.query._mode=='csr'){
+		console.log('url参数开启csr降级')
+		return csrRender(res)
+	}
 	// 获取根据路由渲染出的组件，并且拿到loadData方法，获取数据
 	// 存储网络请求
 	const promises = [];
@@ -54,7 +67,9 @@ app.get('*', (req, res) => {
 	// 等待所有网络请求结束再渲染
 	Promise.all(interceptPromises(promises)).then(data => {
 			// console.log('data---======',data);
-		const context = {}
+		const context = {
+			css:[]
+		}
 		const content = renderToString(
 			<Provider store={store}>
 				<StaticRouter location={req.url} context={context}>
@@ -74,11 +89,15 @@ app.get('*', (req, res) => {
 			console.log('context.url---')
 			res.redirect(301,context.url)
 		}
+		const css = context.css.join('\n')
 		// 字符串模板
 		res.send(`
 		<html>
 			<head>
 				<meta charset="utf-8"/>
+				<style>
+				${css}
+				</style>
 				<title>react ssr</title>
 			</head>
 			<body>
