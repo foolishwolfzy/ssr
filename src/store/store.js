@@ -11,8 +11,10 @@ const reducer = combineReducers({
 	user:userReducer
 })
 
+// 服务端的代理转发
 const serverAxios = axios.create({
-  baseURL: 'http://localhost:9088'
+  baseURL: 'http://localhost:9090'
+  // baseURL: 'http://localhost:9088'
 })
 
 const clientAxios = axios.create({

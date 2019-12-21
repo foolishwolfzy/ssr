@@ -3,6 +3,8 @@ import { Route } from "react-router-dom";
 import Index from "./container/index.js";
 import About from "./container/about.js";
 import User from "./container/user.js";
+import Notfound from "./container/Notfound.js";
+import "./App.css";
 
 // export default (
 // 	<div>
@@ -32,5 +34,11 @@ export default [
 		// loadData:user,
 		exact:true,
 		key:'user'
+	},
+	{
+		// path:'/norfound',
+		component:Notfound,
+		// loadData:user,
+		// key:'norfound'
 	}
 ]

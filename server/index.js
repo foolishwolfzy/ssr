@@ -1,7 +1,7 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import express from "express";
-import { StaticRouter,matchPath, Route } from "react-router-dom";
+import { StaticRouter,matchPath, Route,Switch } from "react-router-dom";
 import routes from "../src/App";
 import { Provider } from "react-redux";
 import {getServerStore} from '../src/store/store.js'
@@ -11,7 +11,7 @@ const proxy = require('express-http-proxy')
 const app = express();
 const store = getServerStore()
 // console.log('store----',store)
-//代理转发
+//来自客户端以/api开头的请求的请求代理转发
 app.use('/api', proxy('http://localhost:9090', {
   proxyReqPathResolver: (req) => {
 		console.log('proxy---',req.url);
@@ -54,14 +54,26 @@ app.get('*', (req, res) => {
 	// 等待所有网络请求结束再渲染
 	Promise.all(interceptPromises(promises)).then(data => {
 			// console.log('data---======',data);
+		const context = {}
 		const content = renderToString(
 			<Provider store={store}>
-				<StaticRouter location={req.url}>
+				<StaticRouter location={req.url} context={context}>
 				<Header></Header>
-					{routes.map(route=><Route {...route}></Route>)}
+				<Switch>
+				{routes.map(route=><Route {...route}></Route>)}
+				</Switch>
 				</StaticRouter>
 			</Provider>
 		)
+		console.log('context--',context)
+		if(context.statuscode){
+			// 状态的切换和页面跳转
+			res.status(context.statuscode)
+		}
+		if(context.action=="REPLACE"){
+			console.log('context.url---')
+			res.redirect(301,context.url)
+		}
 		// 字符串模板
 		res.send(`
 		<html>

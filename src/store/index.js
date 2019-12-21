@@ -14,7 +14,7 @@ export const getIndexList = server=>{
 		return axiosInstance.get('/api/course/list').then(res=>{
 			// console.log('getIndexList---===return2');
 			const {list} = res.data
-			console.log('list',list);
+			// console.log('list',list);
 			dispatch(changeList(list))
 		})
 	}
@@ -25,8 +25,8 @@ const defaultState={
 }
 
 export default (state=defaultState,action) =>{
-	console.log('index-action-type---',action.type);
-	console.log('index-GET_LIST---===',GET_LIST);
+	// console.log('index-action-type---',action.type);
+	// console.log('index-GET_LIST---===',GET_LIST);
 	switch(action.type){
 		case GET_LIST:
 			const newState={
