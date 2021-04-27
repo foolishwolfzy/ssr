@@ -14,6 +14,7 @@ module.exports = {
 		rules:[
 			{
 				test:/\.js$/,
+				// 才能支持import jsx
 				loader:'babel-loader',
 				exclude: /node_modules/,
 				options:{

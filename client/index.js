@@ -20,5 +20,6 @@ if(window.__context){
 	// ssr
 	ReactDom.hydrate(Page,document.getElementById('root'))
 }else{
+	// 降级后变成客户端渲染
 	ReactDom.render(Page,document.getElementById('root'))
 }

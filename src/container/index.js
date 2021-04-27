@@ -37,8 +37,17 @@ function Index(props){
 }
 
 // 服务端loadData
+// let NewIndex = connect(
+// 	state=>({list:state.index.list}),
+// 	{getIndexList}
+// )(withStyle(Index,styles))
+
+// NewIndex.loadData = (store)=>{
+// 	return store.dispatch(getIndexList())
+// }
+
+// export default NewIndex
 Index.loadData = (store)=>{
-	// console.log('index-loadData---', store.dispatch(getIndexList()))
 	return store.dispatch(getIndexList())
 }
 export default connect(

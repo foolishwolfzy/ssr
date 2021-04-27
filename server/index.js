@@ -1,3 +1,4 @@
+// 这里的node代码，用babel处理
 import React from "react";
 import { renderToString } from "react-dom/server";
 import express from "express";
@@ -8,6 +9,7 @@ import fs from "fs";
 import { Provider } from "react-redux";
 import {getServerStore} from '../src/store/store.js'
 import Header from "../src/component/Header.js";
+import config from "./config.js";
 const proxy = require('express-http-proxy')
 // console.log('proxy---===',proxy);
 const app = express();
@@ -43,7 +45,8 @@ const interceptPromises = (promises)=> {
 app.use(express.static('public'))
 app.get('*', (req, res) => {
 	// console.log('res.query---',req.query)
-	if(req.query._mode=='csr'){
+	// if(req.query._mode=='csr'){
+	if(req.query._mode=='csr' || config.csr){
 		console.log('url参数开启csr降级')
 		return csrRender(res)
 	}
