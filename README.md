@@ -1,4 +1,4 @@
-tips:完整版请切到lesson4分支 localhost:9088
+localhost:9088
 
 ### 1. 同构的优点
 
