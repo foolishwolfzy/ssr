@@ -11,7 +11,7 @@ const Page = (<Provider store={getClientStore()}>
 	<BrowserRouter>
 	<Header></Header>
 	<Switch>
-	{routes.map(route=><Route {...route}></Route>)}
+	{routes.map(route=><Route {...route} key={route.toString()}></Route>)}
 	</Switch> 
 	</BrowserRouter>
 </Provider>)

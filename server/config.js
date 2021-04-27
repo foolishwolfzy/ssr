@@ -1,5 +1,6 @@
 const config= {
-	csr:true
+	csr:false
+	// csr:true
 }
 
 export default config

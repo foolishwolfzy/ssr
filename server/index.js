@@ -78,7 +78,7 @@ app.get('*', (req, res) => {
 				<StaticRouter location={req.url} context={context}>
 				<Header></Header>
 				<Switch>
-				{routes.map(route=><Route {...route}></Route>)}
+				{routes.map(route=><Route {...route} key={route.toString()}></Route>)}
 				</Switch>
 				</StaticRouter>
 			</Provider>
