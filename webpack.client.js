@@ -4,7 +4,7 @@ module.exports = {
 	mode:"development",
 	//客户端入口
 	entry:"./client/index.js",
-	// 客户端输出
+	//客户端输出
 	output:{
 		filename:'bundle.js',
 		path:path.resolve(__dirname, 'public'),
