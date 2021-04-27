@@ -25,7 +25,8 @@ app.get('/api/course/list',(req,res) =>{
 			{name:'nike',id:1},
 			{name:'adidas',id:2},
 			{name:'山本耀司',id:3},
-			{name:'李宁',id:4}
+			{name:'李宁',id:4},
+			{name:'安踏',id:5}
 		]
 	})
 })
