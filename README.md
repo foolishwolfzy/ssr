@@ -12,3 +12,4 @@ localhost:9088
 3.   错误监控，通过多一层promise的封装，捕捉到接口错误，不至于让页面死掉，代码更具健壮性让用户体验更好
 4.   npm run dev:server,服务端用webpack将jsx等变成原生的代码
 5.   npm run dev:start,用nodemon去执行上面打包的的bundle.js
+6.   csr降级：通过url？_mode='csr'或者server文件夹下的config.js文件设置是否为csr
