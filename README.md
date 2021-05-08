@@ -1,3 +1,5 @@
+运行 npm run start 启动
+
 localhost:9088
 
 ### 1. 同构的优点
